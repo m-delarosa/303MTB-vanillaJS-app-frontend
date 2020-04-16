@@ -28,9 +28,9 @@ ul li {
   list-style-type: none;
 }
 
-/* section a:hover {
+section a:hover {
   border-bottom: 1px solid #ff8f00;
-} */
+}
 
 form {
   font-family: "Source Sans Pro", sans-serif;
@@ -131,6 +131,11 @@ section {
     0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
+section a {
+  color: #ff8f00;
+  text-decoration: none;
+}
+
 #trail-reports-card > h2 {
   font-family: "Roboto Slab", serif;
   font-size: 36px;
@@ -151,11 +156,12 @@ section {
   line-height: 32px;
   color: rgb(51, 51, 51);
   justify-content: space-between;
+  /* margin-bottom: 2em; */
 }
 
 #legend > li {
-  padding-left: 2em;
-  margin-left: 1em;
+  padding-left: 2.5em;
+  /* margin-left: 1em; */
 }
 
 #green {
@@ -174,4 +180,25 @@ section {
   background-image: url("images/forbidden.png");
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+#trails-table {
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  line-height: 32px;
+  color: rgb(51, 51, 51);
+  justify-content: space-between;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 2em;
+  text-decoration: underline;
+}
+
+tr {
+  text-align: center;
+  border-bottom: 1px solid;
+  border-color: #cccccc;
 }
