@@ -1,11 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("%cDOM Content Loaded and Parsed!", "color: magenta")
 
+    const $loginForm = document.querySelector(".login-form")
+    const $profileLink = document.querySelector("#profile")
+    const $loginLink = document.getElementById('login')
+
+    $loginForm.addEventListener("submit", handleLogin)
+    $loginLink.addEventListener('click', () => {
+        event.preventDefault()
+        document.querySelector('.bg-modal').style.display = 'flex'
+    })
+
     fetch("http://localhost:3000/trails")
         .then((response) => response.json())
         .then((trails) => {
+        checkToken()
         trails.forEach((trail) => addTrail(trail))
         })
+
+    function checkToken() {
+        if (localStorage.token)
+            $profileLink.innerHTML = "Profile"
+    }
 
     function addTrail(trail) {
         const $trailsTable = document.querySelector("#trails-table")
@@ -63,4 +79,32 @@ document.addEventListener("DOMContentLoaded", () => {
         $tableRow.append($date)
     }
     
+
+    document.querySelector('.close').addEventListener('click', () => {
+        document.querySelector('.bg-modal').style.display = 'none'
+    })
+
+    function handleLogin(event) {
+        event.preventDefault()
+        const loginFormData = new FormData(event.target)
+      
+        const username = loginFormData.get("username")
+        const password = loginFormData.get("password")
+      
+        const loginBody = { username, password }
+      
+        fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(loginBody),
+        }).then((response) => response.json())
+          .then(result => {
+            console.log(result.token)
+            localStorage.setItem("token", result.token)
+          })
+      
+        event.target.reset()
+      }
 })

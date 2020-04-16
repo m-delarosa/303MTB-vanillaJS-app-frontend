@@ -18,7 +18,10 @@
         <li><a href="#trailFinder">Trail Finder</a></li>
         <li><a href="#forums">Forums</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#login">Login</a></li>
+        <li id="profile">
+          <a id="login" href="#login">Login</a> /
+          <a id="register" href="#register">Register</a>
+        </li>
       </ul>
     </nav>
     <header class="center">
@@ -54,5 +57,18 @@
         </table>
       </section>
     </main>
+
+    <!-- Modal Section -->
+    <div class="bg-modal">
+      <div class="modal-content">
+        <div class="close">+</div>
+        <img src="images/login128.png" alt="person and lock" />
+        <form class="login-form">
+          <input type="text" name="username" placeholder="Username" />
+          <input type="password" name="password" placeholder="Password" />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
