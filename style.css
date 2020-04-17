@@ -102,7 +102,7 @@ header {
 
 .title {
   font-family: "Roboto Slab", serif;
-  font-size: 46px;
+  font-size: 3rem;
   font-weight: normal;
   color: white;
   max-width: 780px;
@@ -138,9 +138,9 @@ section a {
 
 #trail-reports-card > h2 {
   font-family: "Roboto Slab", serif;
-  font-size: 36px;
+  font-size: 2.5rem;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.3);
   margin: 20px 0px;
 }
 
@@ -219,7 +219,8 @@ tr {
 
 .modal-content {
   width: 500px;
-  height: 300px;
+  min-height: 290px;
+  height: auto;
   background-color: white;
   border-radius: 6px;
   text-align: center;
@@ -241,4 +242,14 @@ input {
   font-size: 42px;
   transform: rotate(45deg);
   cursor: pointer;
+}
+
+.login-form li {
+  color: black;
+  margin-top: 10px;
+  list-style: none;
+}
+
+#response-error-message {
+  color: red;
 }
