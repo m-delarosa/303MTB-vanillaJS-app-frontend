@@ -209,7 +209,7 @@ tr {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   top: 0;
   display: flex;
   justify-content: center;
@@ -244,7 +244,8 @@ input {
   cursor: pointer;
 }
 
-.login-form li {
+.login-form li,
+.register-form li {
   color: black;
   margin-top: 10px;
   list-style: none;
@@ -252,4 +253,19 @@ input {
 
 #response-error-message {
   color: red;
+}
+
+.report-form > textarea {
+  height: 50px;
+  width: 260px;
+  display: block;
+  position: absolute;
+  right: 135px;
+}
+
+.report-form > button {
+  display: block;
+  position: absolute;
+  top: 267px;
+  right: 245px;
 }
