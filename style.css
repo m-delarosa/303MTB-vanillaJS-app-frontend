@@ -155,7 +155,7 @@ section a {
   font-size: 18px;
   line-height: 32px;
   color: rgb(51, 51, 51);
-  justify-content: space-between;
+  justify-content: space-around;
   /* margin-bottom: 2em; */
 }
 
@@ -218,7 +218,8 @@ tr {
 }
 
 .modal-content {
-  width: 500px;
+  min-width: 500px;
+  width: auto;
   min-height: 290px;
   height: auto;
   background-color: white;
@@ -251,7 +252,8 @@ input {
   list-style: none;
 }
 
-#response-error-message {
+#response-error-message,
+#response-error-message > li {
   color: red;
 }
 
@@ -268,4 +270,9 @@ input {
   position: absolute;
   top: 267px;
   right: 245px;
+}
+
+#trail-preview-content {
+  width: 1200px;
+  height: 410px;
 }

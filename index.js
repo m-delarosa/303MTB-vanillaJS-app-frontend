@@ -3,15 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const $loginForm = document.querySelector(".login-form")
   const $registerForm = document.querySelector(".register-form")
+  const $reportForm = document.querySelector(".report-form")
 
   const $profileLink = document.querySelector("#profile")
   const $loginLink = document.getElementById("login")
+  const $registerLink = document.getElementById("register")
 
   const $closeLoginButton = document.querySelector(".close")
   const $closeRegisterButton = document.querySelector(".close-register")
-  const $registerLink = document.getElementById("register")
-
   const $closeReportButton = document.querySelector(".close-report")
+  const $closePreviewButton = document.querySelector(".close-preview")
+
+  const $iFrame = document.querySelector("iframe")
 
   //   const $editButtons = document.querySelectorAll(".edit-button")
   //   $editButtons.forEach( (button) => button.addEventListener("click", () => {
@@ -31,6 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   $closeRegisterButton.addEventListener("click", closeRegisterModal)
   $registerForm.addEventListener("submit", handleRegisteration)
+  $closePreviewButton.addEventListener("click", closePreviewModal)
+
+  $reportForm.addEventListener("submit", () => {
+    event.preventDefault()
+    handleReport(trail)
+  })
 
   fetch("http://localhost:3000/trails")
     .then((response) => response.json())
@@ -57,6 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".bg-modal-add-report").style.display = "none"
   }
 
+  function closePreviewModal() {
+    document.querySelector(".bg-modal-trail-preview").style.display = "none"
+  }
+
   function addTrail(trail) {
     const $trailsTable = document.querySelector("#trails-table")
     const $tableRow = document.createElement("tr")
@@ -76,17 +89,34 @@ document.addEventListener("DOMContentLoaded", () => {
     $tableRow.append($addReport)
   }
 
+  //   function addName(trail, $tableRow, $trailsTable) {
+  //     const $name = document.createElement("td")
+
+  //     $name.innerHTML = `<a href=${trail.url} target="_blank">${trail.name}</a>`
+
+  //     $trailsTable.append($tableRow)
+  //     $tableRow.append($name)
+  //   }
+
   function addName(trail, $tableRow, $trailsTable) {
     const $name = document.createElement("td")
+    const $nameLink = document.createElement("a")
 
-    $name.innerHTML = `<a href=${trail.url} target="_blank">${trail.name}</a>`
+    $nameLink.innerText = `${trail.name}`
+    $nameLink.href = "#preview"
+    $nameLink.addEventListener("click", () => {
+      document.querySelector(".bg-modal-trail-preview").style.display = "flex"
+      $iFrame.src = `https://www.mtbproject.com/widget?v=3&map=1&type=trail&id=${trail.mtb_project_id}&x=-11722469&y=4772820&z=6`
+    })
 
     $trailsTable.append($tableRow)
     $tableRow.append($name)
+    $name.append($nameLink)
   }
 
   function addStatus(trail, $tableRow) {
     const $status = document.createElement("td")
+    $status.id = `${trail.id}-status`
 
     if (trail.condition_status == "Bad / Closed")
       $status.innerHTML = `<img src="images/forbidden.png" alt="Closed. Do not ride." />`
@@ -103,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function addDetails(trail, $tableRow) {
     const $details = document.createElement("td")
+    $details.id = `${trail.id}-details`
     $details.innerText = trail.condition_details
     $tableRow.append($details)
   }
@@ -164,6 +195,34 @@ document.addEventListener("DOMContentLoaded", () => {
         // localStorage.setItem("token", result.token)
         handleRegistrationUserResponse(result, $registerForm)
       })
+  }
+
+  function handleReport(trail) {
+    const formData = new FormData($reportForm)
+    const status = formData.get("status")
+    const details = formData.get("details")
+
+    const $status = document.querySelector(`#${trail.id}-status`)
+    $status.innerText = status
+
+    const $details = document.querySelector(`#${trail.id}-details`)
+    $details.innerText = details
+    // const reportBody = { user: { name, username, email, password } }
+
+    // fetch(`http://localhost:3000/trails/${trail.id}`, {
+    //   method: "PATCH",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(reportBody),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     // console.log(result.token)
+    //     // localStorage.setItem("token", result.token)
+    //     handleRegistrationUserResponse(result, $registerForm)
+    //   })
   }
 
   function handleLoginUserResponse(response, form) {

@@ -97,12 +97,24 @@
             <option value="Bad / Closed">Bad / Closed</option>
           </select>
           <textarea
-            name="trail-report-details"
+            name="details"
             maxlength="125"
             placeholder="Add optional details here. 125 characters max."
           ></textarea>
           <button type="submit">Submit</button>
         </form>
+      </div>
+    </div>
+
+    <div class="bg-modal bg-modal-trail-preview">
+      <div class="modal-content" id="trail-preview-content">
+        <div class="close close-preview">+</div>
+        <iframe
+          style="width: 100%; max-width: 1200px; height: 410px;"
+          frameborder="0"
+          scrolling="no"
+          src="https://www.mtbproject.com/widget?v=3&map=1&type=trail&id=845269&x=-11722469&y=4772820&z=6"
+        ></iframe>
       </div>
     </div>
   </body>
